@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h1>Listado de Proveedores</h1>
+<a th:href="@{/providers/nuevo}">Registrar nuevo proveedor</a>
+<table>
+    <tr><th>Nombre</th><th>Teléfono</th><th>Email</th><th>RUC</th><th>Equipos</th><th>Acciones</th></tr>
+    <tr th:each="p : ${listaProveedores}">
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.phoneNumber}"></td>
+        <td th:text="${p.email}"></td>
+        <td th:text="${p.ruc}"></td>
+        <td><span th:each="e : ${p.equipmentTypes}" th:text="${e.name + ' '}"></span></td>
+        <td>
+            <a th:href="@{/providers/editar/{id}(id=${p.id})}">Editar</a>
+            <a th:href="@{/providers/borrar/{id}(id=${p.id})}" onclick="return confirm('¿Seguro?')">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>
