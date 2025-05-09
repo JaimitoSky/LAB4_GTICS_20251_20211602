@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Torres</title>
+</head>
+<body>
+<h1>Listado de Torres</h1>
+<a th:href="@{/torres/nuevo}">Registrar nueva torre</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Ubicación</th>
+        <th>Altura</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${listaTorres}">
+        <td th:text="${t.name}">Nombre</td>
+        <td th:text="${t.location}">Ubicación</td>
+        <td th:text="${t.height}">Altura</td>
+        <td th:text="${t.installationDate}">Fecha</td>
+        <td th:text="${t.state.name}">Estado</td>
+        <td>
+            <a th:href="@{'/torres/editar/' + ${t.id}}">Editar</a>
+            <a th:href="@{'/torres/borrar/' + ${t.id}}" onclick="return confirm('¿Seguro?')">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

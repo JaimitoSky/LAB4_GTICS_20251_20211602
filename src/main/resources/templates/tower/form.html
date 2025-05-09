@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Torre</title>
+</head>
+<body>
+<h1 th:text="${tower.id == null ? 'Registrar Torre' : 'Editar Torre'}"></h1>
+
+<form th:action="@{/torres/guardar}" th:object="${tower}" method="post">
+    <label>Nombre:</label>
+    <input type="text" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br>
+
+    <label>Ubicación:</label>
+    <input type="text" th:field="*{location}">
+    <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span><br>
+
+    <label>Altura:</label>
+    <input type="number" th:field="*{height}" step="0.01">
+    <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span><br>
+
+    <label>Fecha de instalación:</label>
+    <input type="date" th:field="*{installationDate}">
+    <span th:if="${#fields.hasErrors('installationDate')}" th:errors="*{installationDate}"></span><br>
+
+    <label>Estado:</label>
+    <select th:field="*{state}">
+        <option th:each="e : ${listaEstados}" th:value="${e}" th:text="${e.name}"></option>
+    </select>
+    <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span><br>
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a th:href="@{/torres}">Volver</a>
+</body>
+</html>
